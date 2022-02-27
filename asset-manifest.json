@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/Kodius-Checkout-Project/static/css/main.9c3d81ad.css",
-    "main.js": "/Kodius-Checkout-Project/static/js/main.369e2374.js",
+    "main.css": "/Kodius-Checkout-Project/static/css/main.e4f212dd.css",
+    "main.js": "/Kodius-Checkout-Project/static/js/main.a2de52c7.js",
     "static/media/outdoor-motion-sensor.jpg": "/Kodius-Checkout-Project/static/media/outdoor-motion-sensor.d75dd2da92488684888e.jpg",
     "static/media/addition-wireless-camera.jpg": "/Kodius-Checkout-Project/static/media/addition-wireless-camera.ae0add26889d6b888d9c.jpg",
     "static/media/aeotec-senzor-za-vodu-pakiranje.jpg": "/Kodius-Checkout-Project/static/media/aeotec-senzor-za-vodu-pakiranje.19d29d49f92599d0fb19.jpg",
     "static/media/smoke-sensor.jpg": "/Kodius-Checkout-Project/static/media/smoke-sensor.d2e606bd4b07b82ee19f.jpg",
     "index.html": "/Kodius-Checkout-Project/index.html",
-    "main.9c3d81ad.css.map": "/Kodius-Checkout-Project/static/css/main.9c3d81ad.css.map",
-    "main.369e2374.js.map": "/Kodius-Checkout-Project/static/js/main.369e2374.js.map"
+    "main.e4f212dd.css.map": "/Kodius-Checkout-Project/static/css/main.e4f212dd.css.map",
+    "main.a2de52c7.js.map": "/Kodius-Checkout-Project/static/js/main.a2de52c7.js.map"
   },
   "entrypoints": [
-    "static/css/main.9c3d81ad.css",
-    "static/js/main.369e2374.js"
+    "static/css/main.e4f212dd.css",
+    "static/js/main.a2de52c7.js"
   ]
 }
