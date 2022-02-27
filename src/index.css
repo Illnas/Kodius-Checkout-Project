@@ -1,3 +1,6 @@
+
+
+
 * {
   margin: 0;
   padding: 0;
@@ -68,6 +71,15 @@ header .shopping-cart svg {
   width: 100%;
   height: 100%;
   z-index: 100;
+}
+
+.empty {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
 }
 
 main {
@@ -228,9 +240,9 @@ section .box-container button {
   background-color: rgb(233, 233, 233);
   border: 1px solid grey;
   border-radius: 6px;
-  width: 50%;
-  height: 30px;
-  margin-bottom: 10px;
+  margin: 10px;
+  min-width: 150px;
+  min-height: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -248,7 +260,10 @@ section .box-container button {
   align-items: center;
   width: 100%;
   height: 150px;
-  background-color: rgb(241, 199, 199);
+  background-color: rgb(255, 255, 255);
+  overflow-y: scroll;
+  scrollbar-width: none;
+  margin-bottom: 10px;
 }
 
 .promo-codes .inputs {
@@ -280,15 +295,20 @@ section .box-container button {
   justify-content: space-between;
   width: 80%;
   padding: 5px;
+  background-color: rgb(233, 233, 233);
+  border: 1px solid black;
+  margin: 5px 0;
 }
 
 .promo-codes .errors {
-  margin: 5px 20px;
+  width: 100%;
+  text-align: center;
+  padding: 10px;
 }
 
 .promo button {
-  width: 60px;
-  height: 30px;
+  width: 40px;
+  height: 20px;
   border: 1px solid black;
   border-radius: 6px;
   background-color: rgb(233, 233, 233);
@@ -328,7 +348,7 @@ section.checkout-page {
 
 .checkout-container .cartItems {
   width: 50%;
-  height: 100%;
+  height: 80vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -336,6 +356,8 @@ section.checkout-page {
   margin-bottom: 10px;
   border-right: 1px solid black;
   background-color: #fff;
+  overflow-y: scroll;
+  scrollbar-width: none;
 }
 
 .checkout-container .cartItems h2 {
@@ -344,7 +366,7 @@ section.checkout-page {
 
 .checkout-container .cartItems .items-displayed {
   width: 60%;
-  height: 50%;
+  height: 400px;
   padding: 0 20px;
   overflow-y: scroll;
   scrollbar-width: none;
@@ -354,7 +376,7 @@ section.checkout-page {
 
 .checkout-container form {
   width: 50%;
-  height: 100%;
+  height: 80vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -419,13 +441,13 @@ section.checkout-page {
 
 .checkout-container form button {
   margin: 10px 0;
-  width: 100px;
-  height: 40px;
+  min-width: 100px;
+  min-height: 30px;
 }
 
 .checkout-container .promotions {
   width: 60%;
-  height: 20%;
+  height: 200px;
   margin-top: 10px;
   background-color: #fff;
   display: flex;
@@ -443,7 +465,7 @@ section.checkout-page {
   width: 100%;
 }
 
-.checkout-container .promotions .promo-container .promo{
+.checkout-container .promotions .promo{
   display: flex;
   flex-direction: row;
   width: 100%;

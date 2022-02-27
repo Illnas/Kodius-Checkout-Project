@@ -14,7 +14,7 @@ const Navbar = ({
   onAdd,
   onRemove,
   twenty,
-  setTwenty
+  setTwenty,
 }) => {
   const [five, setFive] = useState(false);
   const [originalPrice, setOriginalPrice] = useState();
@@ -75,6 +75,7 @@ const Navbar = ({
     setSwitchStateTwo,
     originalPrice,
     totalPrice,
+    setTwenty,
   ]);
 
   const checkoutWindow = () => {
@@ -82,10 +83,13 @@ const Navbar = ({
   };
 
   const addPromo = (e) => {
-    console.log(textRef.current.value);
-
-    if(textRef.current.value !== "20%OFF" && textRef.current.value !== "5%OFF" && textRef.current.value !== "20EUROOFF") {
-      setError(true)
+    let prices = totalPrice;
+    if (
+      textRef.current.value !== "20%OFF" &&
+      textRef.current.value !== "5%OFF" &&
+      textRef.current.value !== "20EUROOFF"
+    ) {
+      setError(true);
     }
 
     if (
@@ -94,8 +98,7 @@ const Navbar = ({
       switchStateTwo === false
     ) {
       setTwenty(true);
-      setError(false)
-
+      setError(false);
     }
 
     if (
@@ -129,8 +132,7 @@ const Navbar = ({
       twenty === false
     ) {
       setSwitchStateOne(true);
-      setError(false)
-
+      setError(false);
     }
 
     if (
@@ -140,8 +142,7 @@ const Navbar = ({
       twenty === false
     ) {
       setSwitchStateOne(true);
-      setError(false)
-
+      setError(false);
     }
 
     if (
@@ -169,8 +170,7 @@ const Navbar = ({
       twenty === false
     ) {
       setSwitchStateTwo(true);
-      setError(false)
-
+      setError(false);
     }
 
     if (
@@ -180,8 +180,7 @@ const Navbar = ({
       twenty === false
     ) {
       setSwitchStateTwo(true);
-      setError(false)
-
+      setError(false);
     }
 
     if (
@@ -201,6 +200,8 @@ const Navbar = ({
     ) {
       setError(true);
     }
+
+    textRef.current.value = null
   };
 
   const removingPromotions = (e) => {
@@ -243,6 +244,54 @@ const Navbar = ({
     }
   };
 
+  const calculatingPromoPrices = () => {
+    let prices = totalPrice;
+    let discountedFive = prices * 0.05;
+    if (switchStateOne === true && switchStateTwo === false) {
+      return (
+        <p>
+          {(prices - discountedFive).toFixed(2)}
+          {"\u20AC"}
+        </p>
+      );
+    }
+
+    if (switchStateOne === true && switchStateTwo === true) {
+      return (
+        <p>
+          {(prices - discountedFive - 20).toFixed(2)}
+          {"\u20AC"}
+        </p>
+      );
+    }
+
+    if (switchStateOne === false && switchStateTwo === true) {
+      return (
+        <p>
+          {(prices - 20).toFixed(2)}
+          {"\u20AC"}
+        </p>
+      );
+    }
+
+    if (twenty === true) {
+      return (
+        <p>
+          {(prices - prices * 0.2).toFixed(2)}
+          {"\u20AC"}
+        </p>
+      );
+    }
+  };
+
+  useEffect(() => {
+    if (error) {
+      setTimeout(() => {
+        setError(false);
+      }, 3000);
+    }
+  }, [error]);
+
   return (
     <header id="header">
       <nav>
@@ -252,9 +301,6 @@ const Navbar = ({
           </li>
           <li>
             <Link to="/orders">Orders</Link>
-          </li>
-          <li>
-            <a href="!#">Third Link</a>
           </li>
         </ul>
       </nav>
@@ -282,7 +328,12 @@ const Navbar = ({
           </div>
           <div className="cart">
             <div className="item-container">
-              {cartItems.length === 0 && <div>Cart is empty</div>}
+              {cartItems.length === 0 && (
+                <div className="empty">
+                  {" "}
+                  <h4>Cart is empty!</h4>{" "}
+                </div>
+              )}
               {cartItems.map((item) => (
                 <div key={item.id} className="item">
                   <h6>{item.name}</h6>
@@ -336,24 +387,32 @@ const Navbar = ({
               </div>
             )}
 
+              <div className="errors">
+              {error && (
+                <div className="errors">
+                  Code entered is wrong! Or entered in wrong combination!
+                </div>
+              )}
+            </div>
+
             <div className="inputs">
               <input type="text" ref={textRef} />
               <button onClick={(e) => addPromo(e)}>Add Promo</button>
             </div>
 
-            {error === true && (
-              <div className="errors">
-                Code entered is wrong! Or entered in wrong combination!
-              </div>
-            )}
-            <div className="errors"></div>
+          
           </div>
           <div className="total-price">
             <h4>Total Price:</h4>
-            <p>
-              {totalPrice.toFixed(2)}
-              {"\u20AC"}
-            </p>
+            {switchStateOne === false &&
+              switchStateTwo === false &&
+              twenty === false && (
+                <p>
+                  {totalPrice.toFixed(2)}
+                  {"\u20AC"}
+                </p>
+              )}
+            {calculatingPromoPrices()}
           </div>
           <Link
             to={disabledCheckout ? "/checkout" : "#"}

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker"
+import 'react-datepicker/dist/react-datepicker.css'
 
 const Checkout = ({
   cartItems,
