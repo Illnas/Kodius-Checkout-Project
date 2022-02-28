@@ -9,7 +9,6 @@ import data from "./data";
 function App() {
   const [boughtItems, setBoughtItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
-  const [minusTwenty, setMinusTwenty] = useState(false);
   const [switchStateOne, setSwitchStateOne] = useState(false);
   const [switchStateTwo, setSwitchStateTwo] = useState(false);
   const [rng, setRng] = useState();
@@ -17,6 +16,7 @@ function App() {
   const [cartItems, setCartItems] = useState([]);
   const [twenty, setTwenty] = useState(false);
 
+  
   const onAdd = (product) => {
     const exist = cartItems.find((x) => x.id === product.id);
     if (exist) {
@@ -60,8 +60,6 @@ function App() {
               setCartItems={setCartItems}
               totalPrice={totalPrice}
               setTotalPrice={setTotalPrice}
-              minusTwenty={minusTwenty}
-              setMinusTwenty={setMinusTwenty}
               switchStateOne={switchStateOne}
               setSwitchStateOne={setSwitchStateOne}
               switchStateTwo={switchStateTwo}
@@ -85,8 +83,6 @@ function App() {
               setCartItems={setCartItems}
               totalPrice={totalPrice}
               setTotalPrice={setTotalPrice}
-              minusTwenty={minusTwenty}
-              setMinusTwenty={setMinusTwenty}
               switchStateOne={switchStateOne}
               setSwitchStateOne={setSwitchStateOne}
               switchStateTwo={switchStateTwo}
@@ -97,8 +93,7 @@ function App() {
             />
 
              
-            <CartItems boughtItems={boughtItems}  switchStateTwo={switchStateTwo}
-            switchStateOne={switchStateOne} twenty={twenty}/>
+            <CartItems boughtItems={boughtItems} />
           </>
         }
       />
@@ -111,7 +106,6 @@ function App() {
             totalPrice={totalPrice}
             switchStateTwo={switchStateTwo}
             switchStateOne={switchStateOne}
-            minusTwenty={minusTwenty}
             setBoughtItems={setBoughtItems}
             setCartItems={setCartItems}
             rng={rng}

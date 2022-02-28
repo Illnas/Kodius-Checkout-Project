@@ -1,14 +1,7 @@
-import React, {useState} from "react";
+import React from "react";
 import { v4 as uuidv4 } from "uuid";
 
-const CartItems = ({ boughtItems, switchStateOne, switchStateTwo, twenty }) => {
-  console.log(boughtItems);
-  const [stateOne, setStateOne] = useState(false)
-  const [stateTwo, setStateTwo] = useState(false)
-  const [stateTwenty, setStateTwenty] = useState(false)
-
-
-
+const CartItems = ({ boughtItems }) => {
 
   const concatArr = (arr1, arr2, sep) =>
     arr1.map(function (num, idx) {
@@ -19,7 +12,6 @@ const CartItems = ({ boughtItems, switchStateOne, switchStateTwo, twenty }) => {
       );
     });
 
-    console.log(boughtItems.states)
 
   return (
     <div className="order-items">
@@ -32,7 +24,22 @@ const CartItems = ({ boughtItems, switchStateOne, switchStateTwo, twenty }) => {
               <p>{concatArr(e.name, e.qty, " #")}</p>
 
               <h3>
-                Price: {e.price} {"\u20AC"}
+                Price:
+                {e.states[2] === true &&
+                  Math.ceil(e.price - e.price * 0.2) + "\u20AC"}
+                {e.states[0] === true &&
+                  e.states[1] === false &&
+                  Math.ceil(e.price - e.price * 0.05) + "\u20AC"}
+                {e.states[0] === false &&
+                  e.states[1] === true &&
+                  Math.ceil(e.price - 20) + "\u20AC"}
+                {e.states[0] === true &&
+                  e.states[1] === true &&
+                  Math.ceil(e.price - 20 - e.price * 0.05) + "\u20AC"}
+                {e.states[2] === false &&
+                  e.states[0] === false &&
+                  e.states[1] === false &&
+                  Math.ceil(e.price) + "\u20AC"}
               </h3>
             </div>
           );

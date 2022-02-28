@@ -6,7 +6,6 @@ import 'react-datepicker/dist/react-datepicker.css'
 const Checkout = ({
   cartItems,
   totalPrice,
-  minusTwenty,
   switchStateOne,
   switchStateTwo,
   setBoughtItems,
@@ -25,23 +24,10 @@ const Checkout = ({
       price: totalPrice,
       qty: cartItems.map((e) => e.qty),
       id: rng,
+      states: [switchStateOne, switchStateTwo, twenty]
     };
 
-    if (twenty === true) {
-      oldObject.price = Math.floor(totalPrice - totalPrice * 0.2);
-    }
-
-    if (switchStateOne === true && switchStateTwo === false) {
-      oldObject.price = Math.ceil(totalPrice - totalPrice * 0.05);
-    }
-
-    if (switchStateOne === false && switchStateTwo === true) {
-      oldObject.price = Math.ceil(totalPrice - 20);
-    }
-
-    if (switchStateOne === true && switchStateTwo === true) {
-      oldObject.price = Math.ceil(totalPrice - 20 - totalPrice * 0.05);
-    }
+  
 
     setBoughtItems((oldArray) => [...oldArray, oldObject]);
     setCartItems([]);
@@ -185,7 +171,7 @@ const Checkout = ({
           <h3>
             Total Price:
             {twenty === true &&
-              Math.floor(totalPrice - totalPrice * 0.2) + "\u20AC"}
+              Math.ceil(totalPrice - totalPrice * 0.2) + "\u20AC"}
             {switchStateOne === true &&
               switchStateTwo === false &&
               Math.ceil(totalPrice - totalPrice * 0.05) + "\u20AC"}
@@ -199,7 +185,7 @@ const Checkout = ({
               {
                 twenty === false && switchStateOne === false &&
                 switchStateTwo === false && (
-                  Math.floor(totalPrice).toFixed(2) + "\u20AC"
+                  Math.ceil(totalPrice).toFixed(2) + "\u20AC"
                 )
               }
           </h3>

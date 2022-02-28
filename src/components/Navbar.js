@@ -5,7 +5,6 @@ const Navbar = ({
   cartItems,
   totalPrice,
   setTotalPrice,
-  setMinusTwenty,
   switchStateOne,
   setSwitchStateOne,
   switchStateTwo,
@@ -16,7 +15,6 @@ const Navbar = ({
   twenty,
   setTwenty,
 }) => {
-  const [five, setFive] = useState(false);
   const [originalPrice, setOriginalPrice] = useState();
   const [disabledCheckout, setDisabledCheckout] = useState(false);
   const textRef = useRef();
@@ -26,15 +24,13 @@ const Navbar = ({
     const callingIt = () => {
       setTotalPrice(cartItems.reduce((a, c) => a + c.qty * c.price, 0));
       setOriginalPrice(cartItems.reduce((a, c) => a + c.qty * c.price, 0));
-      setFive(false);
-      setMinusTwenty(false);
       setTwenty(false);
       setSwitchStateOne(false);
       setSwitchStateTwo(false);
       if (cartItems.length !== 0) {
         setDisabledCheckout(true);
       }
-      cartItems.map((e) => {
+      cartItems.forEach((e) => {
         if (e.name === "Smoke Sensor") {
           if (e.qty % 2 === 0) {
             let evaulated = originalPrice - (e.qty / 2) * 5;
@@ -44,13 +40,15 @@ const Navbar = ({
           if (e.qty > 2 && (e.qty % 2 === 0) === false) {
             let saved =
               cartItems.reduce((a, c) => a + c.qty * c.price, 0) -
-              Math.floor(e.qty / 2) * 5;
+              Math.ceil(e.qty / 2) * 5;
             setTotalPrice(saved);
           }
         }
+
+       
       });
 
-      cartItems.map((e) => {
+      cartItems.forEach((e) => {
         if (e.name === "Outdoor Motion Sensor") {
           if (e.qty % 3 === 0) {
             let evaulated = originalPrice - (e.qty / 3) * 10;
@@ -60,7 +58,7 @@ const Navbar = ({
           if (e.qty > 3 && (e.qty % 3 === 0) === false) {
             let saved =
               cartItems.reduce((a, c) => a + c.qty * c.price, 0) -
-              Math.floor(e.qty / 3) * 10;
+              Math.ceil(e.qty / 3) * 10;
             setTotalPrice(saved);
           }
         }
@@ -70,7 +68,6 @@ const Navbar = ({
   }, [
     cartItems,
     setTotalPrice,
-    setMinusTwenty,
     setSwitchStateOne,
     setSwitchStateTwo,
     originalPrice,
@@ -83,7 +80,6 @@ const Navbar = ({
   };
 
   const addPromo = (e) => {
-    let prices = totalPrice;
     if (
       textRef.current.value !== "20%OFF" &&
       textRef.current.value !== "5%OFF" &&
@@ -207,8 +203,6 @@ const Navbar = ({
   const removingPromotions = (e) => {
     if (e.target.value === "20%OFF") {
       setTwenty(false);
-      setFive(false);
-      setMinusTwenty(false);
     }
 
     if (
@@ -250,7 +244,7 @@ const Navbar = ({
     if (switchStateOne === true && switchStateTwo === false) {
       return (
         <p>
-          {(prices - discountedFive).toFixed(2)}
+          {Math.ceil(prices - discountedFive)}
           {"\u20AC"}
         </p>
       );
@@ -259,7 +253,7 @@ const Navbar = ({
     if (switchStateOne === true && switchStateTwo === true) {
       return (
         <p>
-          {(prices - discountedFive - 20).toFixed(2)}
+          {Math.ceil(prices - discountedFive - 20)}
           {"\u20AC"}
         </p>
       );
@@ -268,7 +262,7 @@ const Navbar = ({
     if (switchStateOne === false && switchStateTwo === true) {
       return (
         <p>
-          {(prices - 20).toFixed(2)}
+          {Math.ceil(prices - 20)}
           {"\u20AC"}
         </p>
       );
@@ -277,7 +271,7 @@ const Navbar = ({
     if (twenty === true) {
       return (
         <p>
-          {(prices - prices * 0.2).toFixed(2)}
+          {Math.ceil(prices - prices * 0.2)}
           {"\u20AC"}
         </p>
       );
@@ -408,7 +402,7 @@ const Navbar = ({
               switchStateTwo === false &&
               twenty === false && (
                 <p>
-                  {totalPrice.toFixed(2)}
+                  {Math.ceil(totalPrice)}
                   {"\u20AC"}
                 </p>
               )}
